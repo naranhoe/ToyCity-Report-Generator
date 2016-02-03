@@ -1,22 +1,30 @@
 require 'json'
 require 'date'
+# File path for products.json
 path = File.join(File.dirname(__FILE__), '../data/products.json')
 file = File.read(path)
 products_hash = JSON.parse(file)
+# Accessing products_hash "items"
+items = products_hash["items"]
+todays_date = Date.today
 
 def print_line_break(lines)
 	result = "-" * lines
 	return result + "\n"
 end
 
+f = File.new("./report.txt", "w")
+f.puts("Todays Date: #{todays_date}\n\n", "Products in Data set", print_line_break(25))
+items.each { |report|
+	f.print("Title: #{report['title']}\n", "Retail Price: #{report['full-price']}\n", "Average Sales Price: $#{(report['purchases'][0]['price'] + report['purchases'][1]['price']) / 2 }\n", "Discount: $#{(report['full-price']).to_f - ((report['purchases'][0]['price']) + (report['purchases'][1]['price'])) / 2}\n\n") }
+f.close
+
 # Print today's date
-todays_date = Date.today
 printf "Todays date: #{todays_date.strftime("%m/%d/%Y")}\n\n"
 # For each product in the data set:
 printf "Products in the Data Set\n"
 printf print_line_break(25)
   # Print the name of the toy
-	items = products_hash["items"]
 	items.each { |x|
 		printf "Title: " + x["title"] + "\n" + "Retail Price: $" + x["full-price"] + "\n" + "Average Sales Price: $" + "#{(x['purchases'][0]['price'] + x['purchases'][1]['price']) / 2 }" + "\n" + "Discount: $" + "%.2f\n\n","#{(x['full-price']).to_f - ((x['purchases'][0]['price']) + (x['purchases'][1]['price'])) / 2 }"
 	}

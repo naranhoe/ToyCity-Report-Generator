@@ -1,0 +1,19 @@
+Todays Date: 2016-02-03
+
+Products in Data set
+-------------------------
+Title: LEGO Iron Man vs. Ultron
+Retail Price: 22.99
+Average Sales Price: $18.49
+Discount: $4.5
+
+Title: Nano Block Empire State Building
+Retail Price: 49.99
+Average Sales Price: $34.49
+Discount: $15.5
+
+Title: LEGO Firehouse Headquarters
+Retail Price: 199.99
+Average Sales Price: $189.99
+Discount: $10.0
+
