@@ -45,7 +45,8 @@ end
 f = File.new("./report.txt", "w")
 f.puts("**** Sales Report ****\n", "Todays Date: #{@todays_date}\n", "Time:#{@current_time.strftime('%l:%M:%S %p')}\n\n", "Products", print_line_break(15, "-"))
 @items.each { |product|
-	f.puts("Title: #{product['title']}\n", "Retail Price: #{product['full-price']}\n", "Average Sales Price: $#{(product['purchases'][0]['price'] + product['purchases'][1]['price']) / 2 }\n", "Discount: $#{(product['full-price']).to_f - ((product['purchases'][0]['price']) + (product['purchases'][1]['price'])) / 2}\n\n" ) }
+	discount = (product['full-price']).to_f - ((product['purchases'][0]['price']) + (product['purchases'][1]['price'])) / 2
+	f.puts("Title: #{product['title']}\n", "Retail Price: $#{product['full-price']}\n", "Average Sales Price: $#{(product['purchases'][0]['price'] + product['purchases'][1]['price']) / 2 }\n", "Discount: $#{format("%.2f", discount)}\n\n" ) }
 f.puts print_line_break(35, "-")
 f.puts "Total Sales: " + "#{total_sales_count}"
 f.puts "Total Amount of Sales: $" + "#{@orders}\n"
@@ -56,30 +57,30 @@ f.puts "\n\nBrands\n" + print_line_break(15, "-")
 f.puts print_line_break(35, "-")
 f.puts "Total Brand's in Stock: " + (@items[0]['stock'] + @items[1]['stock']).to_s + "\n"
 f.printf "Average Brand's Toy Price: $#{@average_retail_price.round(2)}\n"
-f.puts "\nTotal Amount of Sales: $" + "#{@orders}\n"
+f.puts "Total Amount of Sales: $" + "#{@orders}\n"
 f.puts print_line_break(35, "-")
 f.close
 
-# Print today's date
-printf "Todays date: #{@todays_date.strftime("%m/%d/%Y")}\n"
-printf "Time:#{@current_time.strftime('%l:%M:%S %p')}\n\n"
-# For each product in the data set:
-printf "Products\n"
-printf print_line_break(15, "-")
-  # Print the name of the toy
-	@items.each { |product|
-		printf "Title: " + product["title"] + "\n" + "Retail Price: $" + product["full-price"] + "\n" + "Average Sales Price: $" + "#{(product['purchases'][0]['price'] + product['purchases'][1]['price']) / 2 }" + "\n" + "Discount: $" + "%.2f\n\n","#{(product['full-price']).to_f - ((product['purchases'][0]['price']) + (product['purchases'][1]['price'])) / 2 }"
-	}
-	printf print_line_break(35, "-")
-	printf "Total Sales: " + "#{total_sales_count}\n"
-	printf "Total Amount of Sales: $" + "#{@orders}\n"
-	printf print_line_break(35, "-")
-	printf "\n\n"
-	printf "Brands\n"
-	printf print_line_break(15, "-")
-	@items.each { |brand| printf "Brand: " + brand['brand'] + "\n" + "In-Stock: " + brand['stock'].to_s + "\n\n"}
-	printf print_line_break(35, "-")
-	printf "Total Brand's in Stock: " + (@items[0]['stock'] + @items[1]['stock']).to_s + "\n"
-	printf "Average Brand's Toy Price: $#{@average_retail_price.round(2)}\n"
-	printf "\nTotal Amount of Sales: $" + "#{@orders}\n"
-  printf print_line_break(35, "-")
+# # Print today's date
+# printf "Todays date: #{@todays_date.strftime("%m/%d/%Y")}\n"
+# printf "Time:#{@current_time.strftime('%l:%M:%S %p')}\n\n"
+# # For each product in the data set:
+# printf "Products\n"
+# printf print_line_break(15, "-")
+#   # Print the name of the toy
+# 	@items.each { |product|
+# 		printf "Title: " + product["title"] + "\n" + "Retail Price: $" + product["full-price"] + "\n" + "Average Sales Price: $" + "#{(product['purchases'][0]['price'] + product['purchases'][1]['price']) / 2 }" + "\n" + "Discount: $" + "%.2f\n\n","#{(product['full-price']).to_f - ((product['purchases'][0]['price']) + (product['purchases'][1]['price'])) / 2 }"
+# 	}
+# 	printf print_line_break(35, "-")
+# 	printf "Total Sales: " + "#{total_sales_count}\n"
+# 	printf "Total Amount of Sales: $" + "#{@orders}\n"
+# 	printf print_line_break(35, "-")
+# 	printf "\n\n"
+# 	printf "Brands\n"
+# 	printf print_line_break(15, "-")
+# 	@items.each { |brand| printf "Brand: " + brand['brand'] + "\n" + "In-Stock: " + brand['stock'].to_s + "\n\n"}
+# 	printf print_line_break(35, "-")
+# 	printf "Total Brand's in Stock: " + (@items[0]['stock'] + @items[1]['stock']).to_s + "\n"
+# 	printf "Average Brand's Toy Price: $#{@average_retail_price.round(2)}\n"
+# 	printf "\nTotal Amount of Sales: $" + "#{@orders}\n"
+#   printf print_line_break(35, "-")
