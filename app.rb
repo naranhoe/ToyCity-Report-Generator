@@ -39,7 +39,6 @@ def total_sales_count
 		total_for_j = j["purchases"][count_j]["user"].count
 		total_for_j = total_for_j + 1
 	end
-
 	return total_for_i + total_for_j
 end
 
